@@ -36,6 +36,7 @@ export const RegisterForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+    // axios.post("/your/api/route", values).then((res) => {        FOR API
     setError("");
     setSuccess("");
 
