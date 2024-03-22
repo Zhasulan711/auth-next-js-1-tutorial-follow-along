@@ -20,7 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Login } from "@/actions/login";
+import { login } from "@/actions/login";
 
 // interface LoginResponse {
 //   error?: string;
@@ -51,7 +51,7 @@ export const LoginForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      Login(values).then((data) => {
+      login(values).then((data) => {
         setError(data?.error);
         setSuccess(data?.success);
       });

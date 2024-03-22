@@ -19,7 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Register } from "@/actions/register";
+import { register } from "@/actions/register";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -41,7 +41,7 @@ export const RegisterForm = () => {
     setSuccess("");
 
     startTransition(() => {
-      Register(values).then((data) => {
+      register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
       });
