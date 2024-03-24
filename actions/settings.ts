@@ -3,6 +3,7 @@
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 
+import { unstable_update } from "@/auth";
 import { db } from "@/lib/db";
 import { SettingsSchema } from "@/schemas";
 import { getUserByEmail, getUserById } from "@/data/user";
@@ -72,12 +73,19 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     values.newPassword = undefined;
   }
 
-  await db.user.update({
-    where: {
-      id: dbUser.id,
-    },
+  const updatedUser = await db.user.update({
+    where: { id: dbUser.id },
     data: {
       ...values,
+    },
+  });
+
+  unstable_update({
+    user: {
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
+      role: updatedUser.role,
     },
   });
 
