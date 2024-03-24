@@ -80,7 +80,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     },
   });
 
-  unstable_update({
+  await unstable_update({
     user: {
       name: updatedUser.name,
       email: updatedUser.email,
